@@ -1,13 +1,14 @@
 from queue import Queue
 from time import sleep
 import random
+import uuid
 
 queue = Queue()
 
 
 def generate_request():
     if random.random() >= 0.5:
-        queue.put(f"заявка {random.randint(1,100000000)}")
+        queue.put(f"заявка {uuid.uuid4()}")
 
 
 def process_request():
@@ -19,7 +20,12 @@ def process_request():
 
 if __name__ == "__main__":
     while True:
-        generate_request()
-        sleep(0.1)
-        process_request()
-        sleep(0.3)
+        try:
+            generate_request()
+            sleep(0.1)
+            process_request()
+            sleep(0.3)
+        except KeyboardInterrupt:
+            queue.empty()
+            print("Завершую роботу")
+            break
