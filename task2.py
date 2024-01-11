@@ -12,6 +12,6 @@ def check_symmetry():
         print("Це паліндром :)")
 
 
-q = deque(re.sub("([^\wА-яіїё])", "", input("Введіть рядок: ")))
+q = deque(str.casefold(re.sub("([^\wА-яіїё])", "", input("Введіть рядок: "))))
 
 check_symmetry()
